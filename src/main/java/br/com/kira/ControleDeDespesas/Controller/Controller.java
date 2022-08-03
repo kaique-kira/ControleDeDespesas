@@ -4,11 +4,9 @@ import br.com.kira.ControleDeDespesas.DTO.ReceitasDTO;
 import br.com.kira.ControleDeDespesas.Entity.ReceitasEntity;
 import br.com.kira.ControleDeDespesas.Service.ReceitasService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +43,19 @@ public class Controller {
                 .map( x -> x.toDTO()).collect(Collectors.toList());
 
         return ResponseEntity.ok().body(listaDTO);
+    }
+
+    @PutMapping("receitas/{id}")
+    public ResponseEntity<ReceitasDTO> update(@PathVariable int id,
+                                              @RequestBody ReceitasDTO receitasDTO){
+        ReceitasEntity receitasEntitySalvo = this.receitasService.update(id, receitasDTO.toEntity());
+        return ResponseEntity.ok().body(receitasEntitySalvo.toDTO());
+    }
+
+    @DeleteMapping("receitas/{id}")
+    public ResponseEntity<Void> delete(@PathVariable int id){
+        this.receitasService.delete(id);
+        return ResponseEntity.ok().build();
     }
 
 }
