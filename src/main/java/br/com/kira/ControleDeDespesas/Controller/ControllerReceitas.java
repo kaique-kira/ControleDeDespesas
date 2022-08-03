@@ -4,7 +4,6 @@ import br.com.kira.ControleDeDespesas.DTO.ReceitasDTO;
 import br.com.kira.ControleDeDespesas.Entity.ReceitasEntity;
 import br.com.kira.ControleDeDespesas.Service.ReceitasService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-public class Controller {
+public class ControllerReceitas {
 
     @Autowired
     private ReceitasService receitasService;

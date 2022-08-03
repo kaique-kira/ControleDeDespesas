@@ -4,7 +4,6 @@ package br.com.kira.ControleDeDespesas.Service;
 import br.com.kira.ControleDeDespesas.Entity.ReceitasEntity;
 import br.com.kira.ControleDeDespesas.Exception.ObjNotFoundException;
 import br.com.kira.ControleDeDespesas.Repository.ReceitasRepository;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,11 +35,6 @@ public class ReceitasService {
         return receita;
     }
 
-    public ReceitasEntity getOne(int id){
-        return this.receitasRepository.findById(id).orElseThrow(() ->
-                new ObjNotFoundException("Elemento com o " + id + "Não encontrado"));
-    }
-    
     public ReceitasEntity update(int id, ReceitasEntity receitasEntity){
         Optional<ReceitasEntity> receitasEntityOptional = this.receitasRepository.findById(id);
         if (receitasEntityOptional.isPresent()){

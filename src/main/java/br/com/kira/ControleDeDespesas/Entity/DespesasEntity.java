@@ -1,6 +1,6 @@
 package br.com.kira.ControleDeDespesas.Entity;
 
-import br.com.kira.ControleDeDespesas.DTO.ReceitasDTO;
+import br.com.kira.ControleDeDespesas.DTO.DespesasDTO;
 import lombok.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,8 +14,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "receitas")
-public class ReceitasEntity {
+@Table(name = "despesas")
+public class DespesasEntity {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
@@ -28,8 +28,10 @@ public class ReceitasEntity {
     @DateTimeFormat(pattern = "dd/mm/yyyy")
     private LocalDateTime data;
 
-    public ReceitasDTO toDTO(){
+    public DespesasDTO toDTO(){
         ModelMapper mapper = new ModelMapper();
-        return mapper.map(this, ReceitasDTO.class);
+        return mapper.map(this, DespesasDTO.class);
     }
+
+
 }
