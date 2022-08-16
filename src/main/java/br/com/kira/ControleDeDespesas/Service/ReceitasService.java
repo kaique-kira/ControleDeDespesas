@@ -30,7 +30,7 @@ public class ReceitasService {
         return novaReceita;
     }
 
-    public List<ReceitasEntity> getAll(){
+    public List<ReceitasEntity> getAllReceitas(){
         List<ReceitasEntity> receita = this.receitasRepository.findAll();
         return receita;
     }

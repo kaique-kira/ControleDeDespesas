@@ -29,8 +29,8 @@ public class ControllerReceitas {
 
 
     @GetMapping("receitas")
-    public ResponseEntity<List<ReceitasDTO>> getAll() {
-        List<ReceitasEntity> lista = this.receitasService.getAll();
+    public ResponseEntity<List<ReceitasDTO>> getAllReceitas() {
+        List<ReceitasEntity> lista = this.receitasService.getAllReceitas();
 
         List<ReceitasDTO> listaDTO = new ArrayList<>();
 
