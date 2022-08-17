@@ -1,8 +1,8 @@
 package br.com.kira.ControleDeDespesas.Service;
 
 
+
 import br.com.kira.ControleDeDespesas.Entity.ReceitasEntity;
-import br.com.kira.ControleDeDespesas.Exception.ObjNotFoundException;
 import br.com.kira.ControleDeDespesas.Repository.ReceitasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,4 +52,9 @@ public class ReceitasService {
     public void delete(int id ){
         this.receitasRepository.deleteById(id);
     }
+    
+    public List<ReceitasEntity> getByDescricaoContains(String descricao){
+    	return this.receitasRepository.findByDescricaoContains(descricao);
+    }
+    
 }

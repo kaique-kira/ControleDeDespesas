@@ -18,8 +18,6 @@ public class ControllerDespesas {
     @Autowired
     private DespesasService despesasService;
 
-    @Autowired
-    private DespesasEntity D;
 
     @GetMapping("despesas")
     public ResponseEntity<List<DespesasDTO>> getAll(){
@@ -31,10 +29,10 @@ public class ControllerDespesas {
     }
 
     @PostMapping("despesas")
-    public ResponseEntity<DespesasDTO> create (@RequestBody DespesasDTO despesasDTO){
-        return ResponseEntity.ok().body(
-                this.despesasService.save(despesasDTO.toEntity()).toDTO());
-
+    public ResponseEntity<DespesasDTO> createDespesas (@RequestBody DespesasDTO despesasDTO){
+        DespesasEntity despesasEntity = despesasDTO.toEntity();
+        DespesasEntity despesasEntitySalvo = this.despesasService.save(despesasEntity);
+        return ResponseEntity.ok().body(despesasEntitySalvo.toDTO());
     }
 
     @PutMapping("despesas/{id}")
@@ -50,12 +48,21 @@ public class ControllerDespesas {
 
         return ResponseEntity.ok().build();
     }
-
-    @GetMapping("despesas/get-by-category/{categoria}")
-    public ResponseEntity<DespesasDTO> getByCategoria(@PathVariable String categoria){
-
-        return ResponseEntity.ok().body(this.despesasService.getByCategoria(categoria).toDTO());
-
+    
+    @GetMapping("despesas/{descricao}")
+    public ResponseEntity<List<DespesasDTO>> getByDescricaoContains (@PathVariable String descricao){
+    	List<DespesasEntity> lista = this.despesasService.getByDescricaoContains(descricao);
+		
+		List<DespesasDTO> listaDTO = new ArrayList<>();
+		
+		for (int i = 0; i < lista.size(); i++) {
+			listaDTO.add( lista.get(i).toDTO() );
+		}
+				
+		return ResponseEntity.ok().body( listaDTO );
+    	
     }
+
+
 
 }
