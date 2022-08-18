@@ -14,6 +14,8 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 import org.modelmapper.ModelMapper;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.com.kira.ControleDeDespesas.DTO.ReceitasDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,6 +42,7 @@ public class ReceitasEntity {
 
 	private BigDecimal valor;
 
+	@JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate data;
 
     

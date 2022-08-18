@@ -5,6 +5,8 @@ import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.modelmapper.ModelMapper;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -31,7 +33,7 @@ public class DespesasEntity {
 
     private BigDecimal valor;
 
-
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate data;
 
     @Column(name = "categoria", columnDefinition = "enum('Alimentação', 'Saúde', 'Moradia', 'Transporte', 'Educação', 'Lazer', 'Imprevistos', 'Outros')")

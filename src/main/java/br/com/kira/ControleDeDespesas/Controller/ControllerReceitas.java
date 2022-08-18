@@ -1,8 +1,6 @@
 package br.com.kira.ControleDeDespesas.Controller;
 
 import br.com.kira.ControleDeDespesas.DTO.ReceitasDTO;
-import br.com.kira.ControleDeDespesas.DTO.ReceitasDTO;
-import br.com.kira.ControleDeDespesas.Entity.DespesasEntity;
 import br.com.kira.ControleDeDespesas.Entity.ReceitasEntity;
 import br.com.kira.ControleDeDespesas.Service.ReceitasService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +38,6 @@ public class ControllerReceitas {
             listaDTO.add( lista.get(i).toDTO() );
         }
 
-        List<ReceitasDTO> listaDTO2 = lista.stream()
-                .map( x -> x.toDTO()).collect(Collectors.toList());
-
         return ResponseEntity.ok().body(listaDTO);
     }
 
@@ -62,15 +57,27 @@ public class ControllerReceitas {
     
     @GetMapping("receitas/{descricao}")
     public ResponseEntity<List<ReceitasDTO>> getByDescricaoContains (@PathVariable String descricao){
-    	List<ReceitasEntity> lista = this.receitasService.getByDescricaoContains(descricao);
+    	List<ReceitasEntity> list = this.receitasService.getByDescricaoContains(descricao);
 		
-		List<ReceitasDTO> listaDTO = new ArrayList<>();
+		List<ReceitasDTO> listDTO = new ArrayList<>();
 		
-		for (int i = 0; i < lista.size(); i++) {
-			listaDTO.add( lista.get(i).toDTO() );
+		for (int i = 0; i < list.size(); i++) {
+			listDTO.add( list.get(i).toDTO() );
 		}
 				
-		return ResponseEntity.ok().body( listaDTO );
+		return ResponseEntity.ok().body( listDTO );
     	
     }
-}
+    
+    @GetMapping("receitas/{ano}/{mes}")
+    public ResponseEntity<List<ReceitasDTO>> findByMonth(@PathVariable Integer ano, @PathVariable Integer mes) {
+    	List<ReceitasEntity> lista = this.receitasService.findByMonth(ano, mes);
+
+        List<ReceitasDTO> listaDTO = new ArrayList<>();
+
+        for (int i = 0; i < lista.size(); i++) {
+            listaDTO.add( lista.get(i).toDTO() );
+        }
+
+        return ResponseEntity.ok().body(listaDTO);
+}}

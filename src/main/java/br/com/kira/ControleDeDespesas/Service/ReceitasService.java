@@ -2,20 +2,22 @@ package br.com.kira.ControleDeDespesas.Service;
 
 
 
-import br.com.kira.ControleDeDespesas.Entity.ReceitasEntity;
-import br.com.kira.ControleDeDespesas.Repository.ReceitasRepository;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import br.com.kira.ControleDeDespesas.Entity.ReceitasEntity;
+import br.com.kira.ControleDeDespesas.Repository.ReceitasRepository;
+
 
 @Service
 public class ReceitasService {
 
     @Autowired
     private ReceitasRepository receitasRepository;
-
+    
     public ReceitasEntity create(ReceitasEntity receita){
         ReceitasEntity novaReceita = new ReceitasEntity();
 
@@ -57,4 +59,10 @@ public class ReceitasService {
     	return this.receitasRepository.findByDescricaoContains(descricao);
     }
     
+	
+	public List<ReceitasEntity> findByMonth(Integer ano, Integer mes) {
+		
+		return this.receitasRepository.findByMonth(ano, mes);
+
+	}
 }

@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.modelmapper.ModelMapper;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
@@ -24,6 +27,8 @@ public class ReceitasDTO {
     @Length(min = 3, message = "O campo nome deve possuir pelo menos 3 caracteres")
     private String descricao;
     private BigDecimal valor;
+    
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate data;
 
     private enum categorias {
