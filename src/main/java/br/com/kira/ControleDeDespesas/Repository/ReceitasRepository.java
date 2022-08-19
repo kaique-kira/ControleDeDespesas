@@ -14,7 +14,7 @@ public interface ReceitasRepository extends JpaRepository<ReceitasEntity, Intege
 
 	public List<ReceitasEntity> findByDescricaoContains(String descricao);
 	
-	@Query(value="SELECT r FROM Receita r WHERE YEAR(r.data) = :ano AND MONTH(r.data) = :mes", nativeQuery = true)
+	@Query(value="SELECT * FROM Receitas r WHERE YEAR(r.data) = :ano AND MONTH(r.data) = :mes", nativeQuery = true)
 	List<ReceitasEntity> findByMonth(Integer ano, Integer mes);
 	
 	

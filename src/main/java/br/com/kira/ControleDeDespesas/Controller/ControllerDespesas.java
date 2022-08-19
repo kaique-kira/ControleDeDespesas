@@ -1,14 +1,15 @@
 package br.com.kira.ControleDeDespesas.Controller;
 
 import br.com.kira.ControleDeDespesas.DTO.DespesasDTO;
+import br.com.kira.ControleDeDespesas.DTO.ReceitasDTO;
 import br.com.kira.ControleDeDespesas.Entity.DespesasEntity;
+import br.com.kira.ControleDeDespesas.Entity.ReceitasEntity;
 import br.com.kira.ControleDeDespesas.Service.DespesasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
-import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -63,6 +64,18 @@ public class ControllerDespesas {
     	
     }
 
+    @GetMapping("despesas/{ano}/{mes}")
+    public ResponseEntity<List<DespesasDTO>> findByMonthFromDespesas(@PathVariable Integer ano, @PathVariable Integer mes) {
+    	List<DespesasEntity> lista = this.despesasService.findByMonthFromDespesas(ano, mes);
+
+        List<DespesasDTO> listaDTO = new ArrayList<>();
+
+        for (int i = 0; i < lista.size(); i++) {
+            listaDTO.add( lista.get(i).toDTO() );
+        }
+
+        return ResponseEntity.ok().body(listaDTO);
+}
 
 
 }

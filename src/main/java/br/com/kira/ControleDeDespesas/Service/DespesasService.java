@@ -66,4 +66,9 @@ public class DespesasService {
     	return this.despesasRepository.findByDescricaoContains(descricao);
     }
 
+	public List<DespesasEntity> findByMonthFromDespesas(Integer ano, Integer mes) {
+		
+		return this.despesasRepository.findByMonthFromDespesas(ano, mes);
+
+	}
 }
