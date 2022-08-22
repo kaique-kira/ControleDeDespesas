@@ -2,6 +2,7 @@ package br.com.kira.ControleDeDespesas.Service;
 
 
 import br.com.kira.ControleDeDespesas.Entity.DespesasEntity;
+import br.com.kira.ControleDeDespesas.Entity.ResumoEntity;
 import br.com.kira.ControleDeDespesas.Repository.DespesasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,4 +72,9 @@ public class DespesasService {
 		return this.despesasRepository.findByMonthFromDespesas(ano, mes);
 
 	}
+	
+	List<DespesasEntity> findResumyByMonthIncome(Integer ano, Integer mes){
+		return this.despesasRepository.findResumyByMonthIncome(ano, mes);
+	}
+	
 }

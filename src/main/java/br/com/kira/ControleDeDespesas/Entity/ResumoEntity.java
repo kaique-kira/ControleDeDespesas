@@ -1,8 +1,10 @@
 package br.com.kira.ControleDeDespesas.Entity;
 
-import java.math.BigDecimal;
+
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import org.modelmapper.ModelMapper;
 
@@ -15,15 +17,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "resumo")
 public class ResumoEntity {
 	
-	private BigDecimal valorTotalMesReceita;
-	
-	private BigDecimal valorTotalMesDespesas;
-	
-	private BigDecimal saldoFinal;
-	
-	private BigDecimal valorTotalGastoCategoria;
+	private LocalDate anoMes;
+	private Double valorTotalDespesas = 0D;
+	private Double valorTotalReceitas = 0D;
+	private Double saldo;
+
 	
 	
 	public ResumoDTO toDTO(){

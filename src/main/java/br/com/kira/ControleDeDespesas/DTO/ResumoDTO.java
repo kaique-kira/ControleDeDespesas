@@ -1,6 +1,7 @@
 package br.com.kira.ControleDeDespesas.DTO;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 
@@ -17,13 +18,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ResumoDTO {
 	
-	private BigDecimal valorTotalMesReceita;
-	
-	private BigDecimal valorTotalMesDespesas;
-	
-	private BigDecimal saldoFinal;
-	
-	private BigDecimal valorTotalGastoCategoria;
+	private LocalDate anoMes;
+	private Double valorTotalDespesas = 0D;
+	private Double valorTotalReceitas = 0D;
+	private Double saldo;
+
 	
 	public ResumoEntity toEntity() {
 		ModelMapper mapper = new ModelMapper();

@@ -17,7 +17,8 @@ public interface ReceitasRepository extends JpaRepository<ReceitasEntity, Intege
 	@Query(value="SELECT * FROM Receitas r WHERE YEAR(r.data) = :ano AND MONTH(r.data) = :mes", nativeQuery = true)
 	List<ReceitasEntity> findByMonth(Integer ano, Integer mes);
 	
-	
+	@Query(value = "SELECT sum(valor) FROM Receitas where data  = month(:mes);", nativeQuery = true)
+	double findSumReceita(Integer ano, Integer mes);
 
 
 }
