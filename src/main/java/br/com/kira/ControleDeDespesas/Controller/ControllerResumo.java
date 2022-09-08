@@ -1,21 +1,47 @@
 package br.com.kira.ControleDeDespesas.Controller;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import br.com.kira.ControleDeDespesas.DTO.ResumoDTO;
+import br.com.kira.ControleDeDespesas.Repository.DespesasRepository;
+import br.com.kira.ControleDeDespesas.Repository.ReceitasRepository;
 import br.com.kira.ControleDeDespesas.Service.ResumoService;
 
 public class ControllerResumo {
 	
 	@Autowired
-	public ResumoService resumoService;
+	private ReceitasRepository receitaRepository;
+	@Autowired
+	private DespesasRepository despesaRepository;
 	
+	@GetMapping("resumo/{ano}/{mes}")
+	public ResponseEntity<?> summaryByMonth(@PathVariable Integer ano, @PathVariable Integer mes) {
+		
+		LocalDate startDate;
+		
+		try {
+			startDate = LocalDate.of(ano, mes, 1);
+		} catch (DateTimeException e) {
+			return ResponseEntity
+					.badRequest()
+					.build();
+		}
+		
+		LocalDate endDate = startDate.with(TemporalAdjusters.lastDayOfMonth());
 
-    @GetMapping("/{ano}/{mes}")
-    public ResumoDTO resumoDoMes(@PathVariable("ano") Integer ano, @PathVariable("mes") Integer mes) {
-        return resumoService.resumoDoMes(ano, mes);
-    }
+		ResumoDTO resumoDto = new ResumoDTO(startDate, 
+				endDate, 
+				receitaRepository, 
+				despesaRepository);
+		
+		return ResponseEntity.ok(resumoDto);
+	}
 	
 }
